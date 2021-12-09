@@ -5,8 +5,15 @@ using System.Text;
 
 namespace CalculatorEx
 {
-    public class Validation
+    public abstract class Validation
     {
+        protected ConfigParams _configParams;
 
+        public Validation(ConfigParams configParams)
+        {
+            _configParams = configParams;
+        }
+
+        public abstract bool Validate(string[] tokens);
     }
 }

@@ -9,23 +9,13 @@ namespace CalculatorEx
     {
         static void Main(string[] args)
         {
-            List<string> skipTokens = new List<string>() { " " };
-            Dictionary<string, int> binaryOperators = new Dictionary<string, int>()
-            {
-                {"+", 0 }, {"-", 0}, {"*", 1}, {"/", 1}
-            };
-            Dictionary<string, int> unaryOperators = new Dictionary<string, int>()
-            {
-                {"s", 0 }, {"c", 0}
-            };
-            List<string> parentheses = new List<string>() { "(", ")" };
-
+            ConfigParams configParams = new ConfigParams();
             try
             {
-                Priority priority = new Priority(binaryOperators, unaryOperators, parentheses);
+                Priority priority = new Priority(configParams.binaryOperators, configParams.unaryOperators, configParams.parentheses);
                 ExpressionRow expression = new ExpressionRow();
                 string[] tokens = expression.Process();
-                NumericCalculator calc = new NumericCalculator(tokens, priority, skipTokens);
+                NumericCalculator calc = new NumericCalculator(tokens, priority, configParams.skipTokens);
                 Console.WriteLine(calc.Calculate());
             }
             catch (Exception e)

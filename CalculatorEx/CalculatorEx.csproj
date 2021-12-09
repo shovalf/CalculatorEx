@@ -43,11 +43,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinaryOperator.cs" />
+    <Compile Include="ConfigParams.cs" />
     <Compile Include="ExpressionByRowEnter.cs" />
     <Compile Include="ExpressionRow.cs" />
     <Compile Include="IExpression.cs" />
     <Compile Include="IOperator.cs" />
+    <Compile Include="NumberValidation.cs" />
     <Compile Include="NumericCalculator.cs" />
+    <Compile Include="ParenthesesValidation.cs" />
     <Compile Include="Priority.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

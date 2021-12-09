@@ -29,6 +29,18 @@ namespace CalculatorEx
             _parentheses = priority.Parentheses;
         }
 
+        private void CalculateBasicExpression()
+        {
+            if (_unaryOperators.ContainsKey(_ops.Peek()))
+            {
+                _values.Push(_unaryOperatorActivation.Activate(_ops.Pop(), new List<double>() { _values.Pop() }));
+            }
+            else
+            {
+                _values.Push(_binaryOperatorActivation.Activate(_ops.Pop(), new List<double>() { _values.Pop(), _values.Pop() }));
+            }
+        }
+
         private void HandleClosingParenthes()
         {
             while (_ops.Peek() != _parentheses[0])
@@ -38,34 +50,20 @@ namespace CalculatorEx
             _ops.Pop();
         }
 
-        private void HandleOperators(int i)
+        private void HandleOperators(string oper)
         {
-            while (_ops.Count > 0 && _priority.DeterminePriority(_tokens[i], _ops.Peek()))
+            while (_ops.Count > 0 && _priority.DeterminePriority(oper, _ops.Peek()))
             {
-                if (_unaryOperators.ContainsKey(_ops.Peek()))
-                {
-                    _values.Push(_unaryOperatorActivation.Activate(_ops.Pop(), new List<double>() { _values.Pop() }));
-                }
-                else
-                {
-                    _values.Push(_binaryOperatorActivation.Activate(_ops.Pop(), new List<double>() { _values.Pop(), _values.Pop() }));
-                }
+                CalculateBasicExpression();
             }
-            _ops.Push(_tokens[i]);
+            _ops.Push(oper);
         }
 
         public void LastCalculation()
         {
             while (_ops.Count > 0)
             {
-                if (_unaryOperators.ContainsKey(_ops.Peek()))
-                {
-                    _values.Push(_unaryOperatorActivation.Activate(_ops.Pop(), new List<double>() { _values.Pop() }));
-                }
-                else
-                {
-                    _values.Push(_binaryOperatorActivation.Activate(_ops.Pop(), new List<double>() { _values.Pop(), _values.Pop() }));
-                }
+                CalculateBasicExpression();
             }
         }
 
@@ -97,12 +95,25 @@ namespace CalculatorEx
                 }
                 else if (_binaryOperators.ContainsKey(_tokens[i]) || _unaryOperators.ContainsKey(_tokens[i]))
                 {
-                    HandleOperators(i);
+                    HandleOperators(_tokens[i]);
                 }
                 else if (_unaryOperators.ContainsKey(_ops.Peek()))
                 {
                     _values.Push(_unaryOperatorActivation.Activate(_ops.Pop(), new List<double>() { _values.Pop() }));
-
+                }
+                else
+                {
+                    StringBuilder sbuf = new StringBuilder();
+                    while (!double.TryParse(_tokens[i], out double number))
+                    {
+                        if (_binaryOperators.ContainsKey(sbuf.ToString()) || _unaryOperators.ContainsKey(sbuf.ToString()))
+                        {
+                            break;
+                        }
+                        sbuf.Append(_tokens[i++]);
+                    }
+                    i--;
+                    HandleOperators(sbuf.ToString());
                 }
             }
             LastCalculation();

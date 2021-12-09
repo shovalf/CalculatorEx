@@ -11,10 +11,12 @@ namespace CalculatorEx
         {
             switch (oper)
             {
-                case "s":
+                case "sin":
                     return Math.Sin(operands[0]);
-                case "c":
+                case "cos":
                     return Math.Cos(operands[0]);
+                case "-":
+                    return -operands[0];
                 default:
                     return default;
             }
