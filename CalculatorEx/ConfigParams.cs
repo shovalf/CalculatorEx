@@ -14,7 +14,7 @@ namespace CalculatorEx
             };
         public readonly Dictionary<string, int> unaryOperators = new Dictionary<string, int>()
             {
-                {"sin", 1 }, {"cos", 1}, {"-", 0}
+                {"sin", 1 }, {"cos", 1}
             };
         public readonly List<string> parentheses = new List<string>() { "(", ")" };
     }

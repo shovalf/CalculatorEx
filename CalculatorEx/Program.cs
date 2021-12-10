@@ -12,11 +12,20 @@ namespace CalculatorEx
             ConfigParams configParams = new ConfigParams();
             try
             {
-                Priority priority = new Priority(configParams.binaryOperators, configParams.unaryOperators, configParams.parentheses);
+                Priority priority = new Priority(configParams);
                 ExpressionRow expression = new ExpressionRow();
                 string[] tokens = expression.Process();
-                NumericCalculator calc = new NumericCalculator(tokens, priority, configParams.skipTokens);
-                Console.WriteLine(calc.Calculate());
+                Validation validation = new Validation(configParams, tokens);
+                if (validation.Validate())
+                {
+                    NumericCalculator calc = new NumericCalculator(tokens, priority, configParams);
+                    Console.WriteLine(calc.Calculate());
+                }
+                else
+                {
+                    Console.WriteLine("EROOR!");
+                }
+                
             }
             catch (Exception e)
             {

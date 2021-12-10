@@ -15,8 +15,6 @@ namespace CalculatorEx
                     return Math.Sin(operands[0]);
                 case "cos":
                     return Math.Cos(operands[0]);
-                case "-":
-                    return -operands[0];
                 default:
                     return default;
             }

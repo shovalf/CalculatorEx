@@ -7,32 +7,28 @@ namespace CalculatorEx
 {
     public class Priority
     {
-        public Dictionary<string, int> BinaryOperators { get; }
-        public Dictionary<string, int> UnaryOperators { get; }
-        public List<string> Parentheses { get; }
+        private ConfigParams _configParams;
 
-        public Priority(Dictionary<string, int> binaryOperators, Dictionary<string, int> unaryOperators, List<string> parentheses)
+        public Priority(ConfigParams configParams)
         {
-            BinaryOperators = binaryOperators;
-            UnaryOperators = unaryOperators;
-            Parentheses = parentheses;
+            _configParams = configParams;
         }
 
         public bool DeterminePriority(string oper, string operTopStack)
         {
-            if (Parentheses.Contains(operTopStack))
+            if (_configParams.parentheses.Contains(operTopStack))
             {
                 return false;
             }
-            if (UnaryOperators.ContainsKey(oper) && BinaryOperators.ContainsKey(operTopStack))
+            if (_configParams.unaryOperators.ContainsKey(oper) && _configParams.binaryOperators.ContainsKey(operTopStack))
             {
                 return false;
             }
-            if (UnaryOperators.ContainsKey(operTopStack))
+            if (_configParams.unaryOperators.ContainsKey(operTopStack))
             {
                 return true;
             }
-            if (BinaryOperators[operTopStack] < BinaryOperators[oper])
+            if (_configParams.binaryOperators[operTopStack] < _configParams.binaryOperators[oper])
             {
                 return false;
             }
