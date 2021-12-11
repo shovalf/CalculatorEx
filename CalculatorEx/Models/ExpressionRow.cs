@@ -7,9 +7,8 @@ namespace CalculatorEx
 {
     public class ExpressionRow: IExpression
     {
-        public string[] Process()
+        public string[] Process(string expression)
         {
-            string expression = Console.ReadLine();
             string[] processedExpression = new string[expression.Length];
             for (int i=0;i<expression.Length;i++)
             {

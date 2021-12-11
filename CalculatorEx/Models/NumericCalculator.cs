@@ -109,10 +109,13 @@ namespace CalculatorEx
                 {
                     HandleOperators(_tokens[i]);
                 }
-                else if (_configParams.unaryOperators.ContainsKey(_ops.Peek()))
+                else if (_ops.Count() != 0)
                 {
-                    _values.Push(_unaryOperatorActivation.Activate(_ops.Pop(), new List<double>() { _values.Pop() }));
-                }
+                    if (_configParams.unaryOperators.ContainsKey(_ops.Peek()) && _values.Count() != 0)
+                    {
+                        _values.Push(_unaryOperatorActivation.Activate(_ops.Pop(), new List<double>() { _values.Pop() }));
+                    }
+                }               
                 else
                 {
                     i = HandleOperatorMultipyChars(i);

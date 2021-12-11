@@ -7,6 +7,6 @@ namespace CalculatorEx
 {
     public interface IExpression
     {
-        string[] Process();
+        string[] Process(string expression);
     }
 }

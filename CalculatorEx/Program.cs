@@ -9,23 +9,26 @@ namespace CalculatorEx
     {
         static void Main(string[] args)
         {
-            ConfigParams configParams = new ConfigParams();
             try
             {
-                Priority priority = new Priority(configParams);
-                ExpressionRow expression = new ExpressionRow();
-                string[] tokens = expression.Process();
-                Validation validation = new Validation(configParams, tokens);
-                if (validation.Validate())
+                string expressionUser;
+                do
                 {
-                    NumericCalculator calc = new NumericCalculator(tokens, priority, configParams);
-                    Console.WriteLine(calc.Calculate());
-                }
-                else
-                {
-                    Console.WriteLine("EROOR!");
-                }
-                
+                    expressionUser = Console.ReadLine();
+                    if (expressionUser != "")
+                    {
+                        ExpressionRow expression = new ExpressionRow();
+                        string[] tokens = expression.Process(expressionUser);
+                        ConfigParams configParams = new ConfigParams();
+                        Priority priority = new Priority(configParams);
+                        FullValidation validation = new FullValidation(configParams, tokens);
+                        if (validation.Validate())
+                        {
+                            NumericCalculator calc = new NumericCalculator(tokens, priority, configParams);
+                            Console.WriteLine(calc.Calculate());
+                        }
+                    }
+                } while (expressionUser != "");
             }
             catch (Exception e)
             {
