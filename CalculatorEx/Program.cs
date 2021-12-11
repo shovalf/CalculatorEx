@@ -17,16 +17,10 @@ namespace CalculatorEx
                     expressionUser = Console.ReadLine();
                     if (expressionUser != "")
                     {
-                        ExpressionRow expression = new ExpressionRow();
-                        string[] tokens = expression.Process(expressionUser);
-                        ConfigParams configParams = new ConfigParams();
-                        Priority priority = new Priority(configParams);
-                        FullValidation validation = new FullValidation(configParams, tokens);
-                        if (validation.Validate())
-                        {
-                            NumericCalculator calc = new NumericCalculator(tokens, priority, configParams);
-                            Console.WriteLine(calc.Calculate());
-                        }
+                        ExpressionRow expressionRow = new ExpressionRow();
+                        string[] tokens = expressionRow.Process(expressionUser);
+                        BasicCalculation calculation = new BasicCalculation(tokens);
+                        calculation.Calculate();
                     }
                 } while (expressionUser != "");
             }

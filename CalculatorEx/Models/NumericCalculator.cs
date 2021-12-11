@@ -74,7 +74,8 @@ namespace CalculatorEx
             StringBuilder sbuf = new StringBuilder();
             while (!double.TryParse(_tokens[i], out double number))
             {
-                if (_configParams.binaryOperators.ContainsKey(sbuf.ToString()) || _configParams.unaryOperators.ContainsKey(sbuf.ToString()))
+                if (_configParams.binaryOperators.ContainsKey(sbuf.ToString()) || 
+                    _configParams.unaryOperators.ContainsKey(sbuf.ToString()))
                 {
                     break;
                 }
@@ -109,13 +110,10 @@ namespace CalculatorEx
                 {
                     HandleOperators(_tokens[i]);
                 }
-                else if (_ops.Count() != 0)
+                else if (_ops.Count()!=0 && _configParams.unaryOperators.ContainsKey(_ops.Peek()) && _values.Count() != 0)
                 {
-                    if (_configParams.unaryOperators.ContainsKey(_ops.Peek()) && _values.Count() != 0)
-                    {
-                        _values.Push(_unaryOperatorActivation.Activate(_ops.Pop(), new List<double>() { _values.Pop() }));
-                    }
-                }               
+                    _values.Push(_unaryOperatorActivation.Activate(_ops.Pop(), new List<double>() { _values.Pop() }));
+                }
                 else
                 {
                     i = HandleOperatorMultipyChars(i);

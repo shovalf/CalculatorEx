@@ -42,12 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstracts\FullCalculation.cs" />
+    <Compile Include="BasicCalculation.cs" />
+    <Compile Include="ExpWithResultCalculation.cs" />
     <Compile Include="Models\BinaryOperator.cs" />
     <Compile Include="Validations\BinaryOperatorValidation.cs" />
     <Compile Include="ConfigParams.cs" />
     <Compile Include="Models\ExpressionByRowEnter.cs" />
     <Compile Include="Models\ExpressionRow.cs" />
-    <Compile Include="ExpressionWithResult.cs" />
     <Compile Include="Validations\FullValidation.cs" />
     <Compile Include="Abstracts\IExpression.cs" />
     <Compile Include="Validations\TokensExpVal.cs" />
