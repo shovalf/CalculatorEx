@@ -17,7 +17,7 @@ namespace CalculatorEx
                     expressionUser = Console.ReadLine();
                     if (expressionUser != "")
                     {
-                        ExpressionByRowEnter expressionRow = new ExpressionByRowEnter();
+                        ExpressionRow expressionRow = new ExpressionRow();
                         string[] tokens = expressionRow.Process(expressionUser);
                         BasicCalculation calculation = new BasicCalculation(tokens);
                         calculation.Calculate();
