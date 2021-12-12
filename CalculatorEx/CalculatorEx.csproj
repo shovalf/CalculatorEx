@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -29,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -40,8 +42,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstracts\FullCalculation.cs" />
+    <Compile Include="BasicCalculation.cs" />
+    <Compile Include="ExpWithResultCalculation.cs" />
+    <Compile Include="Models\BinaryOperator.cs" />
+    <Compile Include="Validations\BinaryOperatorValidation.cs" />
+    <Compile Include="ConfigParams.cs" />
+    <Compile Include="Models\ExpressionByRowEnter.cs" />
+    <Compile Include="Models\ExpressionRow.cs" />
+    <Compile Include="Validations\FullValidation.cs" />
+    <Compile Include="Abstracts\IExpression.cs" />
+    <Compile Include="Validations\TokensExpVal.cs" />
+    <Compile Include="Abstracts\IOperator.cs" />
+    <Compile Include="Models\NumericCalculator.cs" />
+    <Compile Include="Abstracts\OperatorValidation.cs" />
+    <Compile Include="Validations\ParenthesesValidation.cs" />
+    <Compile Include="Models\Priority.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validations\StartEndExpVal.cs" />
+    <Compile Include="Models\UnaryOperator.cs" />
+    <Compile Include="Validations\UnaryOperatorValidation.cs" />
+    <Compile Include="Abstracts\ExpressionValidation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
